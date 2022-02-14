@@ -16,7 +16,7 @@ async function getNodes(api) {
 }
 
 async function getPrice() {
-    const res = await axios.get('https://tftprice.grid.tf')
+    const res = await axios.get('http://192.168.8.113:8000/')
     return res.data.USD
 }
 
@@ -35,6 +35,10 @@ export async function getData() {
     } catch (error) {
         price = 0
     }
+
+    await dev.disconnect()
+    await test.disconnect()
+    await main.disconnect()
 
     return {
         totalTwins: twins.toNumber() + twins1.toNumber() + twins2.toNumber(),

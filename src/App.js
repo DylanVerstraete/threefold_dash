@@ -14,85 +14,73 @@ import './App.css'
 
 function App() {
   const [data, setData] = useState({})
+  const [date, setDate] = useState(new Date())
 
   useEffect(() => {
-    console.log('triggered')
+    console.log('effect triggered')
     getData()
       .then(data => setData(data))
+    setInterval(() => {
+      console.log('interval triggered')
+      getData()
+        .then(data => setData(data))
+      setDate(new Date())
+    }, 60000)
   }, [])
 
   return (
     <div className="App">
       <header className="App-header">
-      <h2>Threefold today: {new Date().toLocaleDateString()}</h2>
+      <h2 style={{ marginTop: 0 }}>Threefold today: {date.toDateString()}</h2>
       <Grid
         container
-        spacing={12}
+        spacing={1}
         direction="row"
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item xs={6} md={6}>
-          <Card style={{ width: '80%', margin: 'auto', backgroundColor: '#6769e8' }}>
+        <Grid item xs={3} md={4}>
+          <Card style={{ width: '100%', margin: 'auto', backgroundColor: '#6769e8' }}>
             <CardActionArea>
-              <PeopleIcon style={{ fontSize: '10em', color: 'white' }}/>
+              <PeopleIcon style={{ fontSize: '7em', color: 'white' }}/>
               <Typography variant="h2" component="div" color="white">
                 {data.totalTwins - data.totalNodes}
               </Typography>
-              <CardContent>
-                <Typography gutterBottom variant="h4" component="div" color="white">
-                  Users
-                </Typography>
-              </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item xs={6} md={6}>
-          <Card style={{ width: '80%', margin: 'auto', backgroundColor: '#6769e8' }}>
+        <Grid item xs={3} md={4}>
+          <Card style={{ width: '100%', margin: 'auto', backgroundColor: '#6769e8' }}>
             <CardActionArea>
-              <AgricultureIcon style={{ fontSize: '10em', color: 'white' }}/>
+              <AgricultureIcon style={{ fontSize: '7em', color: 'white' }}/>
               <Typography variant="h2" component="div" color="white">
                 {data.totalFarms}
               </Typography>
-              <CardContent>
-                <Typography gutterBottom variant="h4" component="div" color="white">
-                  Farms
-                </Typography>
-              </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item xs={6} md={6}>
-          <Card style={{ width: '80%', margin: 'auto', backgroundColor: '#6769e8' }}>
+        <Grid item xs={3} md={4}>
+          <Card style={{ width: '100%', margin: 'auto', backgroundColor: '#6769e8' }}>
             <CardActionArea>
-              <StorageIcon style={{ fontSize: '10em', color: 'white' }}/>
+              <StorageIcon style={{ fontSize: '7em', color: 'white' }}/>
               <Typography variant="h2" component="div" color="white">
                 {data.totalNodes}
               </Typography>
-              <CardContent>
-                <Typography gutterBottom variant="h4" component="div" color="white">
-                  Nodes
-                </Typography>
-              </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item xs={6} md={6}>
-          <Card style={{ width: '80%', margin: 'auto', backgroundColor: '#6769e8' }}>
+        <Grid item xs={6} md={12}>
+          <Card style={{ width: '100%', margin: 'auto', backgroundColor: '#6769e8' }}>
             <CardActionArea>
-              <AttachMoneyIcon style={{ fontSize: '10em', color: 'white' }}/>
+              <AttachMoneyIcon style={{ fontSize: '7em', color: 'white' }}/>
               <Typography variant="h2" component="div" color="white" >
                 {data.price}
               </Typography>
-              <CardContent>
-                <Typography gutterBottom variant="h4" component="div" color="white">
-                  TFT Price 
-                </Typography>
-              </CardContent>
               </CardActionArea>
           </Card>
         </Grid>
       </Grid>
+      <h2 style={{ marginBottom: 0, marginTop: '1em' }}>Lee stopt me zagen over spacing thx (-: </h2>
       {/* <coingecko-coin-ticker-widget  coin-id="threefold-token" currency="usd" locale="en" width="1000"></coingecko-coin-ticker-widget> */}
       </header>
     </div>
